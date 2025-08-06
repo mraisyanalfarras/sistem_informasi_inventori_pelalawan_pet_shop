@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-     protected $fillable = ['nama_customer', 'alamat', 'telepon', 'email'];
 
-    public function stokKeluars()
-    {
-        return $this->hasMany(Stok_Keluar::class);
-    }
+    protected $fillable = [
+        'kode_customer',
+        'nama_customer',
+        'alamat',
+        'telepon',
+        'email',
+        'jenis_kelamin',
+        'catatan',
+    ];
 }

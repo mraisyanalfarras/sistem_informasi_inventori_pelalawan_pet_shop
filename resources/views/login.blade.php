@@ -121,7 +121,7 @@
 
 <body>
   <div class="login-wrapper">
-    <img src="../assets/img/backgrounds/" alt=" Logo">
+    <img src="../assets/img/backgrounds/logo pet shop.jpeg" alt=" Logo">
     <h4>Login</h4>
     <p>Selamat Datang di <strong>Pelalawan Pet Shop </strong></p>
     <p>Silakan masuk ke akun Anda</p>

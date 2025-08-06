@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stok_keluar extends Model
+class Stock_Keluar extends Model
 {
+    protected $table = 'stock_keluars';
     use HasFactory;
     protected $fillable = ['barang_id', 'customer_id', 'tanggal_keluar', 'jumlah', 'keterangan'];
 

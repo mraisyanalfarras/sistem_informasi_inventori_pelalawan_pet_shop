@@ -74,7 +74,7 @@ class UserController extends Controller
     public function show(User $user)
     {
     
-    $user->load(['datasios', 'datasims', 'dataSirs']);
+    
     return view('admin.users.show', compact('user'));
 
     }

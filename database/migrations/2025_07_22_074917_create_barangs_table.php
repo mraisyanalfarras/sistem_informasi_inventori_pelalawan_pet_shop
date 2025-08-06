@@ -21,7 +21,7 @@ return new class extends Migration
         $table->integer('harga_jual');
         $table->string('satuan');
         $table->text('deskripsi')->nullable();
-        $table->string('foto_barang')->nullable();
+        $table->string('foto')->nullable();
         $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\BarangExport;
 use App\Models\User;
 use App\Mail\TestMail;
 use App\Exports\DataSimExport;
@@ -115,20 +116,32 @@ Route::get('/datasirs/{id}', [DataSirController::class, 'show'])->name('datasir.
 Route::resource('barang', BarangController::class);
 Route::resource('kategori', KategoriController::class);
 Route::resource('suplier', SuplierController::class);
-Route::resource('customer', CustomerController::class);
-Route::resource('stokmasuk', StockMasukController::class);
-Route::resource('stokkeluar', StockKeluarController::class);
-Route::get('/export/sim', function () {
-    return Excel::download(new DataSimExport, 'data_sim.xlsx');
-})->name('export.sim');
+Route::resource('customer', CustomerController::class);;
+Route::resource('stock_keluar', StockKeluarController::class);
+Route::post('/stock-masuk/store-multi', [StockMasukController::class, 'storeMulti'])->name('stock_masuk.storeMulti');
+Route::post('/stock-masuk/store-detail', [StockMasukController::class, 'storeDetail'])->name('stock_masuk.storeDetail');
+Route::prefix('stock_masuk')->group(function () {
+    Route::get('/', [StockMasukController::class, 'index'])->name('stock_masuk.index');
+    Route::get('/create', [StockMasukController::class, 'create'])->name('stock_masuk.create');
+    Route::post('/store', [StockMasukController::class, 'store'])->name('stock_masuk.store');
+    Route::post('/session/add', [StockMasukController::class, 'addToSession'])->name('stock_masuk.session.add');
+    Route::get('/reset', [StockMasukController::class, 'resetSession'])->name('stock_masuk.reset');
+    Route::delete('/{id}', [StockMasukController::class, 'destroy'])->name('stock_masuk.destroy');
+});
 
-Route::get('/export/sio', function () {
-    return Excel::download(new DataSioExport, 'data_sio.xlsx');
-})->name('export.sio');
+Route::get('/stock-keluar/{id}/pdf', [StockKeluarController::class, 'cetakPDF'])->name('stock_keluar.cetak_pdf');
+Route::get('/stock-keluar/cetak-filter', [StockKeluarController::class, 'cetakFilter'])->name('stock_keluar.cetak_filter');
+Route::get('/stock_masuk/cetak-filter', [StockMasukController::class, 'cetakFilter'])->name('stock_masuk.cetakFilter');
 
-Route::get('/export/sir', function () {
-    return Excel::download(new DataSirExport, 'data_sir.xlsx');
-})->name('export.sir');
+
+
+Route::get('/export/barang', function () {
+    return new BarangExport(
+        request('kategori_id'),
+        request('suplier_id'),
+        request('search')
+    );
+})->name('export.barang');
 
     Route::resource('send-promotions', SendPromotionController::class);
     Route::get('send-all-promotions', [EmailController::class, 'sendPromotionEmails'])->name('send.all.promotions');

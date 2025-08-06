@@ -39,53 +39,5 @@
             </div>
         </div>
     </div>
-
-    {{-- Gambar Lisensi --}}
-    <div class="mt-5">
-        <h4 class="fw-bold text-primary">Gambar Dokumen Pengguna</h4>
-        <div class="row">
-            {{-- Foto SIM --}}
-            @foreach($user->datasims as $sim)
-                @if($sim->foto)
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ asset('storage/' . $sim->foto) }}" class="card-img-top img-fluid" alt="Foto SIM">
-                        <div class="card-body text-center">
-                            <small class="text-muted">Foto SIM</small>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            @endforeach
-
-            {{-- Foto SIO --}}
-            @foreach($user->datasios as $sio)
-                @if($sio->foto)
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ asset('storage/' . $sio->foto) }}" class="card-img-top img-fluid" alt="Foto SIO">
-                        <div class="card-body text-center">
-                            <small class="text-muted">Foto SIO</small>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            @endforeach
-
-            {{-- Foto SIR --}}
-            @foreach($user->dataSirs as $sir)
-                @if($sir->foto)
-                <div class="col-md-3 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="{{ asset('storage/' . $sir->foto) }}" class="card-img-top img-fluid" alt="Foto SIR">
-                        <div class="card-body text-center">
-                            <small class="text-muted">Foto SIR</small>
-                        </div>
-                    </div>
-                </div>
-                @endif
-            @endforeach
-        </div>
-    </div>
 </div>
 @endsection

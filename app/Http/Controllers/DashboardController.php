@@ -2,65 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataSim;
-use App\Models\DataSio;
-use App\Models\DataSir;
+use Carbon\Carbon;
+use App\Models\Barang;
+use App\Models\Suplier;
+use App\Models\Customer;
+use App\Models\Stock_Keluar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
     public function index()
-{
-    $now = now();
-    $threshold = $now->copy()->addMonths(3);
+    {$totalBarang = Barang::count();
+    $totalSuplier = Suplier::count();
+    $totalCustomer = Customer::count();
+    $lowStockItems = Barang::with('suplier')->where('stok', '<', 10)->get();
 
-    // ✅ Hitung total semua data
-    $totalSim = DataSim::count();
-    $totalSio = DataSio::count();
-    $totalSir = DataSir::count();
+    // Data grafik penjualan mingguan
+    $weeklySales = Stock_Keluar::selectRaw('WEEK(tanggal_keluar) as week, COUNT(*) as total')
+        ->whereYear('tanggal_keluar', Carbon::now()->year)
+        ->groupBy('week')
+        ->orderBy('week')
+        ->get();
 
-    // ✅ Hitung total data expired
-    $totalExpiredSim = DataSim::where('status', 'expired')->count();
-    $totalExpiredSio = DataSio::where('status', 'expired')->count();
-    $totalExpiredSir = DataSir::where('status', 'expired')->count();
+    // Data grafik penjualan bulanan
+    $monthlySales = Stock_Keluar::selectRaw('MONTH(tanggal_keluar) as month, COUNT(*) as total')
+        ->whereYear('tanggal_keluar', Carbon::now()->year)
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
 
-    // ✅ Hitung total data yang akan expired dalam 3 bulan ke depan
-    $totalExpiringSim = DataSim::whereBetween('expire_date', [$now, $threshold])->count();
-    $totalExpiringSio = DataSio::whereBetween('expire_date', [$now, $threshold])->count();
-    $totalExpiringSir = DataSir::whereBetween('expire_date', [$now, $threshold])->count();
+    // Data grafik penjualan tahunan
+    $yearlySales = Stock_Keluar::selectRaw('YEAR(tanggal_keluar) as year, COUNT(*) as total')
+        ->groupBy('year')
+        ->orderBy('year')
+        ->get();
 
-    // ✅ Data untuk list detail (kalau kamu mau tampilkan juga)
-    $simExpiringSoon = DataSim::whereBetween('expire_date', [$now, $threshold])->get();
-    $sioExpiringSoon = DataSio::whereBetween('expire_date', [$now, $threshold])->get();
-    $sirExpiringSoon = DataSir::whereBetween('expire_date', [$now, $threshold])->get();
-
-    $expiredSims = DataSim::where('status', 'expired')->get();
-    $expiredSios = DataSio::where('status', 'expired')->get();
-    $expiredSirs = DataSir::where('status', 'expired')->get();
-
-    $hasExpired = !$expiredSims->isEmpty() || !$expiredSios->isEmpty() || !$expiredSirs->isEmpty();
-    $hasExpiringSoon = !$simExpiringSoon->isEmpty() || !$sioExpiringSoon->isEmpty() || !$sirExpiringSoon->isEmpty();
-
-    // ✅ Kirim semua ke view
     return view('admin.dashboard.index', compact(
-        'totalSim',
-        'totalSio',
-        'totalSir',
-        'totalExpiredSim',
-        'totalExpiredSio',
-        'totalExpiredSir',
-        'totalExpiringSim',
-        'totalExpiringSio',
-        'totalExpiringSir',
-        'simExpiringSoon',
-        'sioExpiringSoon',
-        'sirExpiringSoon',
-        'expiredSims',
-        'expiredSios',
-        'expiredSirs',
-        'hasExpired',
-        'hasExpiringSoon'
+        'totalBarang',
+        'totalSuplier',
+        'totalCustomer',
+        'lowStockItems',
+        'weeklySales',
+        'monthlySales',
+        'yearlySales'
     ));
-}
-
+    }
 }

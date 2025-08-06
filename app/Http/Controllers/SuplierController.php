@@ -13,7 +13,7 @@ class SuplierController extends Controller
     public function index()
     {
         $supliers = Suplier::latest()->get();
-        return view('admin.suplier.index', compact('supliers'));
+        return view('admin.suplyer.index', compact('supliers'));
     }
 
     /**
@@ -21,7 +21,7 @@ class SuplierController extends Controller
      */
     public function create()
     {
-        return view('admin.suplier.create');
+        return view('admin.suplyer.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class SuplierController extends Controller
      */
     public function show(Suplier $suplier)
     {
-        return view('admin.suplier.show', compact('suplier'));
+        return view('admin.suplyer.show', compact('suplier'));
     }
 
     /**
@@ -54,7 +54,7 @@ class SuplierController extends Controller
      */
     public function edit(Suplier $suplier)
     {
-        return view('suplier.edit', compact('suplier'));
+        return view('admin.suplyer.edit', compact('suplier'));
     }
 
     /**
@@ -71,7 +71,7 @@ class SuplierController extends Controller
 
         $suplier->update($validated);
 
-        return redirect()->route('suplier.index')->with('success', 'Suplier berhasil diperbarui.');
+        return redirect()->route('suplyer.index')->with('success', 'Suplier berhasil diperbarui.');
     }
 
     /**
@@ -80,6 +80,6 @@ class SuplierController extends Controller
     public function destroy(Suplier $suplier)
     {
         $suplier->delete();
-        return redirect()->route('suplier.index')->with('success', 'Suplier berhasil dihapus.');
+        return redirect()->route('suplyer.index')->with('success', 'Suplier berhasil dihapus.');
     }
 }

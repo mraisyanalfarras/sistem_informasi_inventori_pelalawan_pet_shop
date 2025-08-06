@@ -7,18 +7,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>???</title>
+    <title>Sistem Inventori Pelalawan Pet Shop</title>
     <meta name="description" content="Sistem manajemen karyawan terintegrasi" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 
 
 
@@ -88,7 +92,7 @@
                         </ul>
                     </li> --}}
 
-                    <!-- Customer Relationship Management -->
+                    <!-- Produt Management -->
                     <li class="menu-item">
                         <a href="#" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-user-voice"></i>
@@ -119,7 +123,42 @@
                                 </a>
                             </li>
 
-                         
+                             {{-- <li class="menu-item">
+                                <a href="{{ route('customer.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-user-plus fa-2x text-secondary"></i>
+                                    <div>Pelanggan</div>
+                                </a>
+                            </li> --}}
+
+                            {{-- <li class="menu-item">
+                                <a href="{{ route('send-promotions.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-mail-send"></i>
+                                    <div>Kirim Promosi</div>
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </li>
+                              <!-- Produt Management -->
+                    <li class="menu-item">
+                        <a href="#" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-user-voice"></i>
+                            <div data-i18n="Menu CRM">Pelaporan Barang</div>
+                        </a>
+                        <ul class="menu-sub">
+
+                             <li class="menu-item">
+                                <a href="{{ route('stock_masuk.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-user-plus fa-2x text-secondary"></i>
+                                    <div>Masuk Barang</div>
+                                </a>
+                            </li>
+
+                             <li class="menu-item">
+                                <a href="{{ route('stock_keluar.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-user-plus fa-2x text-secondary"></i>
+                                    <div>Barang Keluar</div>
+                                </a>
+                            </li>
                             {{-- <li class="menu-item">
                                 <a href="{{ route('send-promotions.index') }}" class="menu-link">
                                     <i class="menu-icon tf-icons bx bx-mail-send"></i>
@@ -250,7 +289,7 @@
                         <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0">
                                 © <script>document.write(new Date().getFullYear());</script>
-                                Aplikasi Manajemen License Operator dan Rigger - Dibuat dengan <i class='bx bxs-heart' style='color:#ff0000'></i> oleh
+                                Aplikasi Sistem Informasi Inventori <i class='bx bxs-heart' style='color:#ff0000'></i> oleh
                                 <a href="#" target="_blank" class="footer-link fw-bolder">Tim Pengembang</a>
                             </div>
                         </div>

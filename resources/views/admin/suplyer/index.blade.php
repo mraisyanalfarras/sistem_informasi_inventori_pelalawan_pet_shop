@@ -3,9 +3,9 @@
 <div class="container mt-4">
     <div class="card shadow">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="mb-0">📂 Data Kategori</h4>
-            <a href="{{ route('kategori.create') }}" class="btn btn-success">
-                <i class="bi bi-plus-circle"></i> Tambah Kategori
+            <h4 class="mb-0">📦 Data Suplier</h4>
+            <a href="{{ route('suplier.create') }}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Tambah Suplier
             </a>
         </div>
         <div class="card-body">
@@ -21,25 +21,29 @@
                     <thead class="table-dark text-center">
                         <tr>
                             <th>No</th>
-                            <th>Nama Kategori</th>
-                            <th>Deskripsi</th>
+                            <th>Nama Suplier</th>
+                            <th>Alamat</th>
+                            <th>Telepon</th>
+                            <th>Email</th>
                             <th width="200">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($kategoris as $kategori)
+                        @forelse($supliers as $suplier)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $kategori->nama_kategori }}</td>
-                            <td>{{ $kategori->deskripsi ?? '-' }}</td>
+                            <td>{{ $suplier->nama_suplier }}</td>
+                            <td>{{ $suplier->alamat }}</td>
+                            <td>{{ $suplier->telepon }}</td>
+                            <td>{{ $suplier->email }}</td>
                             <td class="text-center">
-                                <a href="{{ route('kategori.show', $kategori) }}" class="btn btn-info btn-sm me-1">
+                                <a href="{{ route('suplier.show', $suplier) }}" class="btn btn-info btn-sm me-1">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('kategori.edit', $kategori) }}" class="btn btn-warning btn-sm me-1">
+                                <a href="{{ route('suplier.edit', $suplier) }}" class="btn btn-warning btn-sm me-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('kategori.destroy', $kategori) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                <form action="{{ route('suplier.destroy', $suplier) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm">
@@ -50,7 +54,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted">Belum ada data kategori.</td>
+                            <td colspan="6" class="text-center text-muted">Belum ada data suplier.</td>
                         </tr>
                         @endforelse
                     </tbody>
